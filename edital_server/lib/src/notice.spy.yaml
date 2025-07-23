@@ -1,0 +1,26 @@
+# Yaml-files in the `models` directory specify which serializable objects
+# should be generated. When you add or modify a file, you will need to run
+# `serverpod generate` to make the generated classes available in the server and
+# client.
+#
+# Please consult the documentation for more information on what you can add to
+# your yaml-files.
+
+### A notice that can be posted and managed by the server.
+class: Notice
+
+# Add the table key, if this class represents a row in the database.
+table: notice
+
+# The fields (and columns if connected to the database) of the class.
+fields:
+  ### The unique ID of the notice.
+  id: int?
+  ### The title of the notice.
+  title: String
+  ### The content of the notice.
+  content: String
+  ### The time when the notice was created.
+  createdAt: DateTime
+  ### The time when the notice was last updated.
+  updatedAt: DateTime?

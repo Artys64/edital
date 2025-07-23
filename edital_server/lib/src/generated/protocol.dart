@@ -12,7 +12,9 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'greeting.dart' as _i3;
+import 'notice.dart' as _i4;
 export 'greeting.dart';
+export 'notice.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
   Protocol._();
@@ -22,7 +24,63 @@ class Protocol extends _i1.SerializationManagerServer {
   static final Protocol _instance = Protocol._();
 
   static final List<_i2.TableDefinition> targetTableDefinitions = [
-    ..._i2.Protocol.targetTableDefinitions
+    ..._i2.Protocol.targetTableDefinitions,
+    _i2.TableDefinition(
+      name: 'notice',
+      dartName: 'Notice',
+      schema: 'public',
+      module: 'edital',
+      columns: [
+        _i2.ColumnDefinition(
+          name: 'id',
+          columnType: _i2.ColumnType.bigint,
+          isNullable: false,
+          dartType: 'int?',
+          columnDefault: 'nextval(\'notice_id_seq\'::regclass)',
+        ),
+        _i2.ColumnDefinition(
+          name: 'title',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'content',
+          columnType: _i2.ColumnType.text,
+          isNullable: false,
+          dartType: 'String',
+        ),
+        _i2.ColumnDefinition(
+          name: 'createdAt',
+          columnType: _i2.ColumnType.timestampWithoutTimeZone,
+          isNullable: false,
+          dartType: 'DateTime',
+        ),
+        _i2.ColumnDefinition(
+          name: 'updatedAt',
+          columnType: _i2.ColumnType.timestampWithoutTimeZone,
+          isNullable: true,
+          dartType: 'DateTime?',
+        ),
+      ],
+      foreignKeys: [],
+      indexes: [
+        _i2.IndexDefinition(
+          indexName: 'notice_pkey',
+          tableSpace: null,
+          elements: [
+            _i2.IndexElementDefinition(
+              type: _i2.IndexElementDefinitionType.column,
+              definition: 'id',
+            )
+          ],
+          type: 'btree',
+          isUnique: true,
+          isPrimary: true,
+        ),
+      ],
+      managed: true,
+    ),
   ];
 
   @override
@@ -37,6 +95,12 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i1.getType<_i3.Greeting?>()) {
       return (data != null ? _i3.Greeting.fromJson(data) : null) as T;
     }
+    if (t == _i4.Notice) {
+      return _i4.Notice.fromJson(data) as T;
+    }
+    if (t == _i1.getType<_i4.Notice?>()) {
+      return (data != null ? _i4.Notice.fromJson(data) : null) as T;
+    }
     try {
       return _i2.Protocol().deserialize<T>(data, t);
     } on _i1.DeserializationTypeNotFoundException catch (_) {}
@@ -49,6 +113,9 @@ class Protocol extends _i1.SerializationManagerServer {
     if (className != null) return className;
     if (data is _i3.Greeting) {
       return 'Greeting';
+    }
+    if (data is _i4.Notice) {
+      return 'Notice';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
@@ -66,6 +133,9 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'Greeting') {
       return deserialize<_i3.Greeting>(data['data']);
     }
+    if (dataClassName == 'Notice') {
+      return deserialize<_i4.Notice>(data['data']);
+    }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
       return _i2.Protocol().deserializeByClassName(data);
@@ -80,6 +150,10 @@ class Protocol extends _i1.SerializationManagerServer {
       if (table != null) {
         return table;
       }
+    }
+    switch (t) {
+      case _i4.Notice:
+        return _i4.Notice.t;
     }
     return null;
   }
