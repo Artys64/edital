@@ -12,8 +12,8 @@
 import 'package:serverpod/serverpod.dart' as _i1;
 
 /// A notice that can be posted and managed by the server.
-abstract class Notice extends _i1.TableRow
-    implements _i1.ProtocolSerialization {
+abstract class Notice
+    implements _i1.TableRow<int?>, _i1.ProtocolSerialization {
   Notice._({
     this.id,
     required this.title,
@@ -63,7 +63,7 @@ abstract class Notice extends _i1.TableRow
   DateTime? updatedAt;
 
   @override
-  _i1.Table get table => t;
+  _i1.Table<int?> get table => t;
 
   /// Returns a shallow copy of this [Notice]
   /// with some or all fields replaced by the given arguments.
@@ -162,7 +162,7 @@ class _NoticeImpl extends Notice {
   }
 }
 
-class NoticeTable extends _i1.Table {
+class NoticeTable extends _i1.Table<int?> {
   NoticeTable({super.tableRelation}) : super(tableName: 'notice') {
     id = _i1.ColumnInt(
       'id',

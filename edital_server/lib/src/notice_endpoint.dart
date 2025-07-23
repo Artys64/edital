@@ -18,8 +18,18 @@ class NoticeEndpoint extends Endpoint {
     return await Notice.db.insertRow(session, notice);
   }
 
-  /// Deletes a notice by ID. This method has the type error described in the problem statement.
+  /// Deletes a notice by ID. Returns true if the notice was found and deleted, false otherwise.
   Future<bool> deleteNotice(Session session, int id) async {
-    return await Notice.db.deleteRow(session, id);
+    // First find the notice by ID
+    final notice = await Notice.db.findById(session, id);
+    
+    // If notice not found, return false
+    if (notice == null) {
+      return false;
+    }
+    
+    // Delete the notice and return true to indicate success
+    await Notice.db.deleteRow(session, notice);
+    return true;
   }
 }
