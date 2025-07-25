@@ -1,0 +1,11 @@
+class: Registration
+table: registrations
+fields:
+  noticeId: int
+  candidateId: int
+  status: String  # PENDING, APPROVED, REJECTED
+  submissionDate: DateTime
+  evaluationDate: DateTime?
+  evaluatorNotes: String?
+  createdAt: DateTime
+  updatedAt: DateTime

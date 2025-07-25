@@ -1,0 +1,8 @@
+class: EvaluationCommittee
+table: evaluation_committees
+fields:
+  noticeId: int
+  evaluatorId: int
+  role: String  # PRESIDENT, MEMBER
+  createdAt: DateTime
+  updatedAt: DateTime

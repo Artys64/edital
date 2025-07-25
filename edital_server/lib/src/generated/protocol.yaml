@@ -1,2 +1,33 @@
+evaluationCommittee:
+  - createCommittee:
+  - getCommitteeByNotice:
+  - listCommitteeMembers:
+  - updateCommittee:
+  - deleteCommittee:
+  - addMember:
+  - removeMember:
+notice:
+  - createNotice:
+  - getNoticeById:
+  - listNotices:
+  - updateNotice:
+  - deleteNotice:
+  - publishNotice:
+  - closeNotice:
+registration:
+  - createRegistration:
+  - getRegistrationById:
+  - listRegistrationsByNotice:
+  - listRegistrationsByCandidate:
+  - updateRegistration:
+  - deleteRegistration:
+  - evaluateRegistration:
+user:
+  - createUser:
+  - getUserById:
+  - getUserByEmail:
+  - listUsers:
+  - updateUser:
+  - deleteUser:
 greeting:
   - hello:

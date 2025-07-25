@@ -1,8 +1,7 @@
 import 'package:edital_server/src/birthday_reminder.dart';
 import 'package:serverpod/serverpod.dart';
-
 import 'package:edital_server/src/web/routes/root.dart';
-
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as auth;
 import 'src/generated/protocol.dart';
 import 'src/generated/endpoints.dart';
 
@@ -16,7 +15,19 @@ void run(List<String> args) async {
     args,
     Protocol(),
     Endpoints(),
+    authenticationHandler: auth.authenticationHandler,
   );
+
+  auth.AuthConfig.set(auth.AuthConfig(
+    sendValidationEmail: (Session, email, validationCode) async {
+      print('Email validation code: $validationCode');
+      return true;
+    },
+    sendPasswordResetEmail: (Session, userInfo, validationCode) async {
+      print('Password reset code: $validationCode');
+      return true;
+    }
+  ));
 
   // Setup a default page at the web root.
   pod.webServer.addRoute(RouteRoot(), '/');

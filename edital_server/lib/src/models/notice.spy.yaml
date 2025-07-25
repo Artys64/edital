@@ -1,0 +1,11 @@
+class: Notice
+table: notices
+fields:
+  title: String
+  description: String
+  startDate: DateTime
+  endDate: DateTime
+  status: String  # DRAFT, PUBLISHED, CLOSED
+  createdById: int
+  createdAt: DateTime
+  updatedAt: DateTime
