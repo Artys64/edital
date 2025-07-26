@@ -1,0 +1,20 @@
+# User model for authentication and user management
+class: User
+
+table: user
+
+fields:
+  ### The unique ID of the user.
+  id: int?
+  ### The username for login.
+  username: String
+  ### The hashed password.
+  passwordHash: String
+  ### The user's email address.
+  email: String
+  ### The user's role (admin, candidate, etc.).
+  role: String
+  ### When the user was created.
+  createdAt: DateTime
+  ### When the user was last updated.
+  updatedAt: DateTime?

@@ -1,0 +1,16 @@
+# Evaluation committee model for managing evaluation committees
+class: EvaluationCommittee
+
+table: evaluation_committees
+
+fields:
+  ### The unique ID of the evaluation committee.
+  id: int?
+  ### The name of the evaluation committee.
+  name: String
+  ### Description of the committee's purpose.
+  description: String?
+  ### When the committee was created.
+  createdAt: DateTime
+  ### When the committee was last updated.
+  updatedAt: DateTime?

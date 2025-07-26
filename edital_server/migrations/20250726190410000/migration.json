@@ -1,0 +1,16 @@
+{
+  "actions": [
+    {
+      "type": "createTable", 
+      "table": "user"
+    },
+    {
+      "type": "createTable",
+      "table": "evaluation_committees" 
+    },
+    {
+      "type": "createTable",
+      "table": "committee_members"
+    }
+  ]
+}
