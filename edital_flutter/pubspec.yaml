@@ -34,6 +34,13 @@ dependencies:
   cupertino_icons: ^1.0.5
   serverpod_auth_shared_flutter: ^2.9.0
   serverpod_auth_email_flutter: ^2.9.0
+  
+  # Navigation and state management
+  go_router: ^14.2.0
+  provider: ^6.1.2
+  
+  # UI components
+  material_design_icons_flutter: ^7.0.7296
 
 dev_dependencies:
   flutter_lints: '>=3.0.0 <7.0.0'
