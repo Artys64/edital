@@ -4,7 +4,7 @@ import 'package:serverpod/serverpod.dart';
 import 'package:edital_server/src/web/routes/root.dart';
 
 import 'src/generated/protocol.dart';
-import 'src/generated/endpoints.dart';
+import 'src/generated/endpoints_extended.dart'; // Use extended endpoints with auth and committee functionality
 
 // This is the starting point of your Serverpod server. In most cases, you will
 // only need to make additions to this file if you add future calls,  are
@@ -15,7 +15,7 @@ void run(List<String> args) async {
   final pod = Serverpod(
     args,
     Protocol(),
-    Endpoints(),
+    EndpointsExtended(), // Use extended endpoints that include auth and evaluation committee
   );
 
   // Setup a default page at the web root.
