@@ -13,19 +13,11 @@ import 'package:serverpod/serverpod.dart' as _i1;
 import 'package:serverpod/protocol.dart' as _i2;
 import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i3;
 import 'greeting.dart' as _i4;
-import 'evaluation_committee.dart' as _i5;
-import 'notice.dart' as _i6;
-import 'registration.dart' as _i7;
-import 'user.dart' as _i8;
-import 'package:edital_server/src/generated/evaluation_committee.dart' as _i9;
-import 'package:edital_server/src/generated/notice.dart' as _i10;
-import 'package:edital_server/src/generated/registration.dart' as _i11;
-import 'package:edital_server/src/generated/user.dart' as _i12;
+import 'registration.dart' as _i5;
+import 'package:edital_server/src/generated/registration.dart' as _i6;
+import 'package:edital_server/src/auth_provider.dart' as _i7;
 export 'greeting.dart';
-export 'evaluation_committee.dart';
-export 'notice.dart';
 export 'registration.dart';
-export 'user.dart';
 
 class Protocol extends _i1.SerializationManagerServer {
   Protocol._();
@@ -35,148 +27,6 @@ class Protocol extends _i1.SerializationManagerServer {
   static final Protocol _instance = Protocol._();
 
   static final List<_i2.TableDefinition> targetTableDefinitions = [
-    _i2.TableDefinition(
-      name: 'evaluation_committees',
-      dartName: 'EvaluationCommittee',
-      schema: 'public',
-      module: 'edital',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.bigint,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'evaluation_committees_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'noticeId',
-          columnType: _i2.ColumnType.bigint,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'evaluatorId',
-          columnType: _i2.ColumnType.bigint,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'role',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'createdAt',
-          columnType: _i2.ColumnType.timestampWithoutTimeZone,
-          isNullable: false,
-          dartType: 'DateTime',
-        ),
-        _i2.ColumnDefinition(
-          name: 'updatedAt',
-          columnType: _i2.ColumnType.timestampWithoutTimeZone,
-          isNullable: false,
-          dartType: 'DateTime',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'evaluation_committees_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
-    _i2.TableDefinition(
-      name: 'notices',
-      dartName: 'Notice',
-      schema: 'public',
-      module: 'edital',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.bigint,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'notices_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'title',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'description',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'startDate',
-          columnType: _i2.ColumnType.timestampWithoutTimeZone,
-          isNullable: false,
-          dartType: 'DateTime',
-        ),
-        _i2.ColumnDefinition(
-          name: 'endDate',
-          columnType: _i2.ColumnType.timestampWithoutTimeZone,
-          isNullable: false,
-          dartType: 'DateTime',
-        ),
-        _i2.ColumnDefinition(
-          name: 'status',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'createdById',
-          columnType: _i2.ColumnType.bigint,
-          isNullable: false,
-          dartType: 'int',
-        ),
-        _i2.ColumnDefinition(
-          name: 'createdAt',
-          columnType: _i2.ColumnType.timestampWithoutTimeZone,
-          isNullable: false,
-          dartType: 'DateTime',
-        ),
-        _i2.ColumnDefinition(
-          name: 'updatedAt',
-          columnType: _i2.ColumnType.timestampWithoutTimeZone,
-          isNullable: false,
-          dartType: 'DateTime',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'notices_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        )
-      ],
-      managed: true,
-    ),
     _i2.TableDefinition(
       name: 'registrations',
       dartName: 'Registration',
@@ -257,87 +107,6 @@ class Protocol extends _i1.SerializationManagerServer {
       ],
       managed: true,
     ),
-    _i2.TableDefinition(
-      name: 'users',
-      dartName: 'User',
-      schema: 'public',
-      module: 'edital',
-      columns: [
-        _i2.ColumnDefinition(
-          name: 'id',
-          columnType: _i2.ColumnType.bigint,
-          isNullable: false,
-          dartType: 'int?',
-          columnDefault: 'nextval(\'users_id_seq\'::regclass)',
-        ),
-        _i2.ColumnDefinition(
-          name: 'name',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'email',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'password',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'role',
-          columnType: _i2.ColumnType.text,
-          isNullable: false,
-          dartType: 'String',
-        ),
-        _i2.ColumnDefinition(
-          name: 'createdAt',
-          columnType: _i2.ColumnType.timestampWithoutTimeZone,
-          isNullable: false,
-          dartType: 'DateTime',
-        ),
-        _i2.ColumnDefinition(
-          name: 'updatedAt',
-          columnType: _i2.ColumnType.timestampWithoutTimeZone,
-          isNullable: false,
-          dartType: 'DateTime',
-        ),
-      ],
-      foreignKeys: [],
-      indexes: [
-        _i2.IndexDefinition(
-          indexName: 'users_pkey',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'id',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: true,
-        ),
-        _i2.IndexDefinition(
-          indexName: 'emailIdx',
-          tableSpace: null,
-          elements: [
-            _i2.IndexElementDefinition(
-              type: _i2.IndexElementDefinitionType.column,
-              definition: 'email',
-            )
-          ],
-          type: 'btree',
-          isUnique: true,
-          isPrimary: false,
-        ),
-      ],
-      managed: true,
-    ),
     ..._i3.Protocol.targetTableDefinitions,
     ..._i2.Protocol.targetTableDefinitions,
   ];
@@ -351,50 +120,33 @@ class Protocol extends _i1.SerializationManagerServer {
     if (t == _i4.Greeting) {
       return _i4.Greeting.fromJson(data) as T;
     }
-    if (t == _i5.EvaluationCommittee) {
-      return _i5.EvaluationCommittee.fromJson(data) as T;
-    }
-    if (t == _i6.Notice) {
-      return _i6.Notice.fromJson(data) as T;
-    }
-    if (t == _i7.Registration) {
-      return _i7.Registration.fromJson(data) as T;
-    }
-    if (t == _i8.User) {
-      return _i8.User.fromJson(data) as T;
+    if (t == _i5.Registration) {
+      return _i5.Registration.fromJson(data) as T;
     }
     if (t == _i1.getType<_i4.Greeting?>()) {
       return (data != null ? _i4.Greeting.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i5.EvaluationCommittee?>()) {
-      return (data != null ? _i5.EvaluationCommittee.fromJson(data) : null)
-          as T;
+    if (t == _i1.getType<_i5.Registration?>()) {
+      return (data != null ? _i5.Registration.fromJson(data) : null) as T;
     }
-    if (t == _i1.getType<_i6.Notice?>()) {
-      return (data != null ? _i6.Notice.fromJson(data) : null) as T;
+    if (t == Map<String, dynamic>) {
+      return (data as Map).map((k, v) =>
+          MapEntry(deserialize<String>(k), deserialize<dynamic>(v))) as T;
     }
-    if (t == _i1.getType<_i7.Registration?>()) {
-      return (data != null ? _i7.Registration.fromJson(data) : null) as T;
-    }
-    if (t == _i1.getType<_i8.User?>()) {
-      return (data != null ? _i8.User.fromJson(data) : null) as T;
-    }
-    if (t == List<_i9.EvaluationCommittee>) {
+    if (t == List<Map<String, dynamic>>) {
       return (data as List)
-          .map((e) => deserialize<_i9.EvaluationCommittee>(e))
+          .map((e) => deserialize<Map<String, dynamic>>(e))
           .toList() as T;
     }
-    if (t == List<_i10.Notice>) {
-      return (data as List).map((e) => deserialize<_i10.Notice>(e)).toList()
-          as T;
-    }
-    if (t == List<_i11.Registration>) {
+    if (t == List<_i6.Registration>) {
       return (data as List)
-          .map((e) => deserialize<_i11.Registration>(e))
+          .map((e) => deserialize<_i6.Registration>(e))
           .toList() as T;
     }
-    if (t == List<_i12.User>) {
-      return (data as List).map((e) => deserialize<_i12.User>(e)).toList() as T;
+    if (t == List<_i7.EvaluationCommittee>) {
+      return (data as List)
+          .map((e) => deserialize<_i7.EvaluationCommittee>(e))
+          .toList() as T;
     }
     try {
       return _i3.Protocol().deserialize<T>(data, t);
@@ -412,17 +164,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (data is _i4.Greeting) {
       return 'Greeting';
     }
-    if (data is _i5.EvaluationCommittee) {
-      return 'EvaluationCommittee';
-    }
-    if (data is _i6.Notice) {
-      return 'Notice';
-    }
-    if (data is _i7.Registration) {
+    if (data is _i5.Registration) {
       return 'Registration';
-    }
-    if (data is _i8.User) {
-      return 'User';
     }
     className = _i2.Protocol().getClassNameForObject(data);
     if (className != null) {
@@ -444,17 +187,8 @@ class Protocol extends _i1.SerializationManagerServer {
     if (dataClassName == 'Greeting') {
       return deserialize<_i4.Greeting>(data['data']);
     }
-    if (dataClassName == 'EvaluationCommittee') {
-      return deserialize<_i5.EvaluationCommittee>(data['data']);
-    }
-    if (dataClassName == 'Notice') {
-      return deserialize<_i6.Notice>(data['data']);
-    }
     if (dataClassName == 'Registration') {
-      return deserialize<_i7.Registration>(data['data']);
-    }
-    if (dataClassName == 'User') {
-      return deserialize<_i8.User>(data['data']);
+      return deserialize<_i5.Registration>(data['data']);
     }
     if (dataClassName.startsWith('serverpod.')) {
       data['className'] = dataClassName.substring(10);
@@ -482,14 +216,8 @@ class Protocol extends _i1.SerializationManagerServer {
       }
     }
     switch (t) {
-      case _i5.EvaluationCommittee:
-        return _i5.EvaluationCommittee.t;
-      case _i6.Notice:
-        return _i6.Notice.t;
-      case _i7.Registration:
-        return _i7.Registration.t;
-      case _i8.User:
-        return _i8.User.t;
+      case _i5.Registration:
+        return _i5.Registration.t;
     }
     return null;
   }

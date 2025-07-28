@@ -10,167 +10,62 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:serverpod/serverpod.dart' as _i1;
-import '../endpoints/evaluation_comittee.dart' as _i2;
-import '../endpoints/notice_endpoint.dart' as _i3;
-import '../endpoints/registration_endpoint.dart' as _i4;
-import '../endpoints/user_endpoint.dart' as _i5;
-import '../greeting_endpoint.dart' as _i6;
-import 'package:edital_server/src/generated/evaluation_committee.dart' as _i7;
-import 'package:edital_server/src/generated/notice.dart' as _i8;
-import 'package:edital_server/src/generated/registration.dart' as _i9;
-import 'package:edital_server/src/generated/user.dart' as _i10;
-import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i11;
+import '../auth_endpoint.dart' as _i2;
+import '../endpoints/registration_endpoint.dart' as _i3;
+import '../evaluation_committee_endpoint.dart' as _i4;
+import '../greeting_endpoint.dart' as _i5;
+import 'package:edital_server/src/generated/registration.dart' as _i6;
+import 'package:serverpod_auth_server/serverpod_auth_server.dart' as _i7;
 
 class Endpoints extends _i1.EndpointDispatch {
   @override
   void initializeEndpoints(_i1.Server server) {
     var endpoints = <String, _i1.Endpoint>{
-      'evaluationCommittee': _i2.EvaluationCommitteeEndpoint()
+      'auth': _i2.AuthEndpoint()
         ..initialize(
           server,
-          'evaluationCommittee',
+          'auth',
           null,
         ),
-      'notice': _i3.NoticeEndpoint()
-        ..initialize(
-          server,
-          'notice',
-          null,
-        ),
-      'registration': _i4.RegistrationEndpoint()
+      'registration': _i3.RegistrationEndpoint()
         ..initialize(
           server,
           'registration',
           null,
         ),
-      'user': _i5.UserEndpoint()
+      'evaluationCommittee': _i4.EvaluationCommitteeEndpoint()
         ..initialize(
           server,
-          'user',
+          'evaluationCommittee',
           null,
         ),
-      'greeting': _i6.GreetingEndpoint()
+      'greeting': _i5.GreetingEndpoint()
         ..initialize(
           server,
           'greeting',
           null,
         ),
     };
-    connectors['evaluationCommittee'] = _i1.EndpointConnector(
-      name: 'evaluationCommittee',
-      endpoint: endpoints['evaluationCommittee']!,
+    connectors['auth'] = _i1.EndpointConnector(
+      name: 'auth',
+      endpoint: endpoints['auth']!,
       methodConnectors: {
-        'createCommittee': _i1.MethodConnector(
-          name: 'createCommittee',
+        'register': _i1.MethodConnector(
+          name: 'register',
           params: {
-            'committee': _i1.ParameterDescription(
-              name: 'committee',
-              type: _i1.getType<_i7.EvaluationCommittee>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['evaluationCommittee']
-                      as _i2.EvaluationCommitteeEndpoint)
-                  .createCommittee(
-            session,
-            params['committee'],
-          ),
-        ),
-        'getCommitteeByNotice': _i1.MethodConnector(
-          name: 'getCommitteeByNotice',
-          params: {
-            'noticeId': _i1.ParameterDescription(
-              name: 'noticeId',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['evaluationCommittee']
-                      as _i2.EvaluationCommitteeEndpoint)
-                  .getCommitteeByNotice(
-            session,
-            params['noticeId'],
-          ),
-        ),
-        'listCommitteeMembers': _i1.MethodConnector(
-          name: 'listCommitteeMembers',
-          params: {
-            'noticeId': _i1.ParameterDescription(
-              name: 'noticeId',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['evaluationCommittee']
-                      as _i2.EvaluationCommitteeEndpoint)
-                  .listCommitteeMembers(
-            session,
-            params['noticeId'],
-          ),
-        ),
-        'updateCommittee': _i1.MethodConnector(
-          name: 'updateCommittee',
-          params: {
-            'committee': _i1.ParameterDescription(
-              name: 'committee',
-              type: _i1.getType<_i7.EvaluationCommittee>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['evaluationCommittee']
-                      as _i2.EvaluationCommitteeEndpoint)
-                  .updateCommittee(
-            session,
-            params['committee'],
-          ),
-        ),
-        'deleteCommittee': _i1.MethodConnector(
-          name: 'deleteCommittee',
-          params: {
-            'id': _i1.ParameterDescription(
-              name: 'id',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['evaluationCommittee']
-                      as _i2.EvaluationCommitteeEndpoint)
-                  .deleteCommittee(
-            session,
-            params['id'],
-          ),
-        ),
-        'addMember': _i1.MethodConnector(
-          name: 'addMember',
-          params: {
-            'noticeId': _i1.ParameterDescription(
-              name: 'noticeId',
-              type: _i1.getType<int>(),
+            'username': _i1.ParameterDescription(
+              name: 'username',
+              type: _i1.getType<String>(),
               nullable: false,
             ),
-            'evaluatorId': _i1.ParameterDescription(
-              name: 'evaluatorId',
-              type: _i1.getType<int>(),
+            'password': _i1.ParameterDescription(
+              name: 'password',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+            'email': _i1.ParameterDescription(
+              name: 'email',
+              type: _i1.getType<String>(),
               nullable: false,
             ),
             'role': _i1.ParameterDescription(
@@ -183,26 +78,25 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['evaluationCommittee']
-                      as _i2.EvaluationCommitteeEndpoint)
-                  .addMember(
+              (endpoints['auth'] as _i2.AuthEndpoint).register(
             session,
-            params['noticeId'],
-            params['evaluatorId'],
+            params['username'],
+            params['password'],
+            params['email'],
             params['role'],
           ),
         ),
-        'removeMember': _i1.MethodConnector(
-          name: 'removeMember',
+        'login': _i1.MethodConnector(
+          name: 'login',
           params: {
-            'noticeId': _i1.ParameterDescription(
-              name: 'noticeId',
-              type: _i1.getType<int>(),
+            'username': _i1.ParameterDescription(
+              name: 'username',
+              type: _i1.getType<String>(),
               nullable: false,
             ),
-            'evaluatorId': _i1.ParameterDescription(
-              name: 'evaluatorId',
-              type: _i1.getType<int>(),
+            'password': _i1.ParameterDescription(
+              name: 'password',
+              type: _i1.getType<String>(),
               nullable: false,
             ),
           },
@@ -210,43 +104,17 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['evaluationCommittee']
-                      as _i2.EvaluationCommitteeEndpoint)
-                  .removeMember(
+              (endpoints['auth'] as _i2.AuthEndpoint).login(
             session,
-            params['noticeId'],
-            params['evaluatorId'],
+            params['username'],
+            params['password'],
           ),
         ),
-      },
-    );
-    connectors['notice'] = _i1.EndpointConnector(
-      name: 'notice',
-      endpoint: endpoints['notice']!,
-      methodConnectors: {
-        'createNotice': _i1.MethodConnector(
-          name: 'createNotice',
+        'getUserById': _i1.MethodConnector(
+          name: 'getUserById',
           params: {
-            'notice': _i1.ParameterDescription(
-              name: 'notice',
-              type: _i1.getType<_i8.Notice>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['notice'] as _i3.NoticeEndpoint).createNotice(
-            session,
-            params['notice'],
-          ),
-        ),
-        'getNoticeById': _i1.MethodConnector(
-          name: 'getNoticeById',
-          params: {
-            'id': _i1.ParameterDescription(
-              name: 'id',
+            'userId': _i1.ParameterDescription(
+              name: 'userId',
               type: _i1.getType<int>(),
               nullable: false,
             )
@@ -255,91 +123,19 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['notice'] as _i3.NoticeEndpoint).getNoticeById(
+              (endpoints['auth'] as _i2.AuthEndpoint).getUserById(
             session,
-            params['id'],
+            params['userId'],
           ),
         ),
-        'listNotices': _i1.MethodConnector(
-          name: 'listNotices',
+        'getAllUsers': _i1.MethodConnector(
+          name: 'getAllUsers',
           params: {},
           call: (
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['notice'] as _i3.NoticeEndpoint).listNotices(session),
-        ),
-        'updateNotice': _i1.MethodConnector(
-          name: 'updateNotice',
-          params: {
-            'notice': _i1.ParameterDescription(
-              name: 'notice',
-              type: _i1.getType<_i8.Notice>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['notice'] as _i3.NoticeEndpoint).updateNotice(
-            session,
-            params['notice'],
-          ),
-        ),
-        'deleteNotice': _i1.MethodConnector(
-          name: 'deleteNotice',
-          params: {
-            'id': _i1.ParameterDescription(
-              name: 'id',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['notice'] as _i3.NoticeEndpoint).deleteNotice(
-            session,
-            params['id'],
-          ),
-        ),
-        'publishNotice': _i1.MethodConnector(
-          name: 'publishNotice',
-          params: {
-            'id': _i1.ParameterDescription(
-              name: 'id',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['notice'] as _i3.NoticeEndpoint).publishNotice(
-            session,
-            params['id'],
-          ),
-        ),
-        'closeNotice': _i1.MethodConnector(
-          name: 'closeNotice',
-          params: {
-            'id': _i1.ParameterDescription(
-              name: 'id',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['notice'] as _i3.NoticeEndpoint).closeNotice(
-            session,
-            params['id'],
-          ),
+              (endpoints['auth'] as _i2.AuthEndpoint).getAllUsers(session),
         ),
       },
     );
@@ -352,7 +148,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'registration': _i1.ParameterDescription(
               name: 'registration',
-              type: _i1.getType<_i9.Registration>(),
+              type: _i1.getType<_i6.Registration>(),
               nullable: false,
             )
           },
@@ -360,7 +156,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['registration'] as _i4.RegistrationEndpoint)
+              (endpoints['registration'] as _i3.RegistrationEndpoint)
                   .createRegistration(
             session,
             params['registration'],
@@ -379,7 +175,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['registration'] as _i4.RegistrationEndpoint)
+              (endpoints['registration'] as _i3.RegistrationEndpoint)
                   .getRegistrationById(
             session,
             params['id'],
@@ -398,7 +194,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['registration'] as _i4.RegistrationEndpoint)
+              (endpoints['registration'] as _i3.RegistrationEndpoint)
                   .listRegistrationsByNotice(
             session,
             params['noticeId'],
@@ -417,7 +213,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['registration'] as _i4.RegistrationEndpoint)
+              (endpoints['registration'] as _i3.RegistrationEndpoint)
                   .listRegistrationsByCandidate(
             session,
             params['candidateId'],
@@ -428,7 +224,7 @@ class Endpoints extends _i1.EndpointDispatch {
           params: {
             'registration': _i1.ParameterDescription(
               name: 'registration',
-              type: _i1.getType<_i9.Registration>(),
+              type: _i1.getType<_i6.Registration>(),
               nullable: false,
             )
           },
@@ -436,7 +232,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['registration'] as _i4.RegistrationEndpoint)
+              (endpoints['registration'] as _i3.RegistrationEndpoint)
                   .updateRegistration(
             session,
             params['registration'],
@@ -455,7 +251,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['registration'] as _i4.RegistrationEndpoint)
+              (endpoints['registration'] as _i3.RegistrationEndpoint)
                   .deleteRegistration(
             session,
             params['id'],
@@ -484,7 +280,7 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['registration'] as _i4.RegistrationEndpoint)
+              (endpoints['registration'] as _i3.RegistrationEndpoint)
                   .evaluateRegistration(
             session,
             params['id'],
@@ -494,79 +290,53 @@ class Endpoints extends _i1.EndpointDispatch {
         ),
       },
     );
-    connectors['user'] = _i1.EndpointConnector(
-      name: 'user',
-      endpoint: endpoints['user']!,
+    connectors['evaluationCommittee'] = _i1.EndpointConnector(
+      name: 'evaluationCommittee',
+      endpoint: endpoints['evaluationCommittee']!,
       methodConnectors: {
-        'createUser': _i1.MethodConnector(
-          name: 'createUser',
-          params: {
-            'user': _i1.ParameterDescription(
-              name: 'user',
-              type: _i1.getType<_i10.User>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['user'] as _i5.UserEndpoint).createUser(
-            session,
-            params['user'],
-          ),
-        ),
-        'getUserById': _i1.MethodConnector(
-          name: 'getUserById',
-          params: {
-            'id': _i1.ParameterDescription(
-              name: 'id',
-              type: _i1.getType<int>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['user'] as _i5.UserEndpoint).getUserById(
-            session,
-            params['id'],
-          ),
-        ),
-        'getUserByEmail': _i1.MethodConnector(
-          name: 'getUserByEmail',
-          params: {
-            'email': _i1.ParameterDescription(
-              name: 'email',
-              type: _i1.getType<String>(),
-              nullable: false,
-            )
-          },
-          call: (
-            _i1.Session session,
-            Map<String, dynamic> params,
-          ) async =>
-              (endpoints['user'] as _i5.UserEndpoint).getUserByEmail(
-            session,
-            params['email'],
-          ),
-        ),
-        'listUsers': _i1.MethodConnector(
-          name: 'listUsers',
+        'getCommittees': _i1.MethodConnector(
+          name: 'getCommittees',
           params: {},
           call: (
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['user'] as _i5.UserEndpoint).listUsers(session),
+              (endpoints['evaluationCommittee']
+                      as _i4.EvaluationCommitteeEndpoint)
+                  .getCommittees(session),
         ),
-        'updateUser': _i1.MethodConnector(
-          name: 'updateUser',
+        'createCommittee': _i1.MethodConnector(
+          name: 'createCommittee',
           params: {
-            'user': _i1.ParameterDescription(
-              name: 'user',
-              type: _i1.getType<_i10.User>(),
+            'name': _i1.ParameterDescription(
+              name: 'name',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+            'description': _i1.ParameterDescription(
+              name: 'description',
+              type: _i1.getType<String?>(),
+              nullable: true,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['evaluationCommittee']
+                      as _i4.EvaluationCommitteeEndpoint)
+                  .createCommittee(
+            session,
+            params['name'],
+            params['description'],
+          ),
+        ),
+        'listCommitteeMembers': _i1.MethodConnector(
+          name: 'listCommitteeMembers',
+          params: {
+            'committeeId': _i1.ParameterDescription(
+              name: 'committeeId',
+              type: _i1.getType<int>(),
               nullable: false,
             )
           },
@@ -574,13 +344,73 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['user'] as _i5.UserEndpoint).updateUser(
+              (endpoints['evaluationCommittee']
+                      as _i4.EvaluationCommitteeEndpoint)
+                  .listCommitteeMembers(
             session,
-            params['user'],
+            params['committeeId'],
           ),
         ),
-        'deleteUser': _i1.MethodConnector(
-          name: 'deleteUser',
+        'addCommitteeMember': _i1.MethodConnector(
+          name: 'addCommitteeMember',
+          params: {
+            'committeeId': _i1.ParameterDescription(
+              name: 'committeeId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'userId': _i1.ParameterDescription(
+              name: 'userId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'role': _i1.ParameterDescription(
+              name: 'role',
+              type: _i1.getType<String>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['evaluationCommittee']
+                      as _i4.EvaluationCommitteeEndpoint)
+                  .addCommitteeMember(
+            session,
+            params['committeeId'],
+            params['userId'],
+            params['role'],
+          ),
+        ),
+        'removeCommitteeMember': _i1.MethodConnector(
+          name: 'removeCommitteeMember',
+          params: {
+            'committeeId': _i1.ParameterDescription(
+              name: 'committeeId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+            'userId': _i1.ParameterDescription(
+              name: 'userId',
+              type: _i1.getType<int>(),
+              nullable: false,
+            ),
+          },
+          call: (
+            _i1.Session session,
+            Map<String, dynamic> params,
+          ) async =>
+              (endpoints['evaluationCommittee']
+                      as _i4.EvaluationCommitteeEndpoint)
+                  .removeCommitteeMember(
+            session,
+            params['committeeId'],
+            params['userId'],
+          ),
+        ),
+        'getCommitteeById': _i1.MethodConnector(
+          name: 'getCommitteeById',
           params: {
             'id': _i1.ParameterDescription(
               name: 'id',
@@ -592,7 +422,9 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['user'] as _i5.UserEndpoint).deleteUser(
+              (endpoints['evaluationCommittee']
+                      as _i4.EvaluationCommitteeEndpoint)
+                  .getCommitteeById(
             session,
             params['id'],
           ),
@@ -616,13 +448,13 @@ class Endpoints extends _i1.EndpointDispatch {
             _i1.Session session,
             Map<String, dynamic> params,
           ) async =>
-              (endpoints['greeting'] as _i6.GreetingEndpoint).hello(
+              (endpoints['greeting'] as _i5.GreetingEndpoint).hello(
             session,
             params['name'],
           ),
         )
       },
     );
-    modules['serverpod_auth'] = _i11.Endpoints()..initializeEndpoints(server);
+    modules['serverpod_auth'] = _i7.Endpoints()..initializeEndpoints(server);
   }
 }

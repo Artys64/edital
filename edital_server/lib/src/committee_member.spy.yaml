@@ -1,0 +1,27 @@
+# Committee member model for managing committee memberships
+class: CommitteeMember
+
+table: committee_members
+
+fields:
+  ### The unique ID of the committee member.
+  id: int?
+  ### Reference to the evaluation committee.
+  committeeId: int
+  ### Reference to the user who is a member.
+  userId: int
+  ### The role of the member in the committee.
+  role: String
+  ### When the membership was created.
+  createdAt: DateTime
+  ### When the membership was last updated.
+  updatedAt: DateTime?
+
+# Foreign key relations
+relations:
+  - name: committee
+    parent: EvaluationCommittee
+    field: committeeId
+  - name: user
+    parent: User  
+    field: userId

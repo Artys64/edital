@@ -1,19 +1,8 @@
-evaluationCommittee:
-  - createCommittee:
-  - getCommitteeByNotice:
-  - listCommitteeMembers:
-  - updateCommittee:
-  - deleteCommittee:
-  - addMember:
-  - removeMember:
-notice:
-  - createNotice:
-  - getNoticeById:
-  - listNotices:
-  - updateNotice:
-  - deleteNotice:
-  - publishNotice:
-  - closeNotice:
+auth:
+  - register:
+  - login:
+  - getUserById:
+  - getAllUsers:
 registration:
   - createRegistration:
   - getRegistrationById:
@@ -22,12 +11,12 @@ registration:
   - updateRegistration:
   - deleteRegistration:
   - evaluateRegistration:
-user:
-  - createUser:
-  - getUserById:
-  - getUserByEmail:
-  - listUsers:
-  - updateUser:
-  - deleteUser:
+evaluationCommittee:
+  - getCommittees:
+  - createCommittee:
+  - listCommitteeMembers:
+  - addCommitteeMember:
+  - removeCommitteeMember:
+  - getCommitteeById:
 greeting:
   - hello:
