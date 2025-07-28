@@ -1,5 +1,6 @@
 import 'package:serverpod/serverpod.dart';
 import 'auth_provider.dart';
+import 'error_logger.dart';
 
 /// This endpoint handles evaluation committee operations
 class EvaluationCommitteeEndpoint extends Endpoint {
@@ -16,7 +17,7 @@ class EvaluationCommitteeEndpoint extends Endpoint {
         ),
       ];
     } catch (e) {
-      session.log('Error getting committees: $e');
+      await ErrorLogger.logError(session, e, context: 'EvaluationCommitteeEndpoint.getCommittees');
       throw Exception('Failed to retrieve committees');
     }
   }
@@ -36,7 +37,7 @@ class EvaluationCommitteeEndpoint extends Endpoint {
         createdAt: DateTime.now(),
       );
     } catch (e) {
-      session.log('Error creating committee: $e');
+      await ErrorLogger.logError(session, e, context: 'EvaluationCommitteeEndpoint.createCommittee');
       throw Exception('Failed to create committee');
     }
   }
@@ -71,7 +72,7 @@ class EvaluationCommitteeEndpoint extends Endpoint {
         },
       ];
     } catch (e) {
-      session.log('Error listing committee members: $e');
+      await ErrorLogger.logError(session, e, context: 'EvaluationCommitteeEndpoint.listCommitteeMembers');
       throw Exception('Failed to retrieve committee members');
     }
   }
@@ -93,7 +94,7 @@ class EvaluationCommitteeEndpoint extends Endpoint {
         createdAt: DateTime.now(),
       );
     } catch (e) {
-      session.log('Error adding committee member: $e');
+      await ErrorLogger.logError(session, e, context: 'EvaluationCommitteeEndpoint.addCommitteeMember');
       throw Exception('Failed to add committee member: ${e.toString()}');
     }
   }
@@ -104,7 +105,7 @@ class EvaluationCommitteeEndpoint extends Endpoint {
       // For now, always return true (success)
       return true;
     } catch (e) {
-      session.log('Error removing committee member: $e');
+      await ErrorLogger.logError(session, e, context: 'EvaluationCommitteeEndpoint.removeCommitteeMember');
       throw Exception('Failed to remove committee member');
     }
   }
@@ -123,7 +124,7 @@ class EvaluationCommitteeEndpoint extends Endpoint {
       }
       return null;
     } catch (e) {
-      session.log('Error getting committee by ID: $e');
+      await ErrorLogger.logError(session, e, context: 'EvaluationCommitteeEndpoint.getCommitteeById');
       throw Exception('Failed to retrieve committee');
     }
   }

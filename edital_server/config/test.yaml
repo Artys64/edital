@@ -48,6 +48,12 @@ sessionLogs:
   consoleEnabled: true
 # consoleLogFormat: json # Defaults to "json", options are "text" or "json"
 
+# Custom error logging configuration
+errorLogging:
+  enabled: true
+  logDirectory: /tmp
+  logFileName: serverpod_errors_test.log
+
 # futureCallExecutionEnabled: true # Defaults to true
 
 #futureCall:
