@@ -8,7 +8,7 @@ CREATE TABLE "evaluation_committees" (
     "noticeId" bigint NOT NULL,
     "evaluatorId" bigint NOT NULL,
     "role" text NOT NULL,
-    "createdIt" timestamp without time zone NOT NULL,
+    "createdAt" timestamp without time zone NOT NULL,
     "updatedAt" timestamp without time zone NOT NULL
 );
 

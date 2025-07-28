@@ -34,7 +34,7 @@
             "dartType": "String"
           },
           {
-            "name": "createdIt",
+            "name": "createdAt",
             "columnType": 4,
             "isNullable": false,
             "dartType": "DateTime"

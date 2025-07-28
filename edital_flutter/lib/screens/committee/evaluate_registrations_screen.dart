@@ -45,7 +45,7 @@ class _EvaluateRegistrationsScreenState extends State<EvaluateRegistrationsScree
       }
 
       setState(() {
-        notice = loadedNotice;
+        notice = loadedNotice as Notice?;
         registrations = loadedRegistrations as List<Registration>;
         users = userMap;
       });
