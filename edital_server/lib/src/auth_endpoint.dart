@@ -1,5 +1,6 @@
 import 'package:serverpod/serverpod.dart';
 import 'auth_provider.dart';
+import 'error_logger.dart';
 
 /// This endpoint handles authentication operations
 class AuthEndpoint extends Endpoint {
@@ -58,7 +59,7 @@ class AuthEndpoint extends Endpoint {
         };
       }
     } catch (e) {
-      session.log('Registration endpoint error: $e');
+      await ErrorLogger.logError(session, e, context: 'AuthEndpoint.register');
       return {
         'success': false,
         'message': 'Registration failed due to a server error',
@@ -103,7 +104,7 @@ class AuthEndpoint extends Endpoint {
         };
       }
     } catch (e) {
-      session.log('Login endpoint error: $e');
+      await ErrorLogger.logError(session, e, context: 'AuthEndpoint.login');
       return {
         'success': false,
         'message': 'Login failed due to a server error',
@@ -134,7 +135,7 @@ class AuthEndpoint extends Endpoint {
         };
       }
     } catch (e) {
-      session.log('Get user endpoint error: $e');
+      await ErrorLogger.logError(session, e, context: 'AuthEndpoint.getUserById');
       return {
         'success': false,
         'message': 'Failed to retrieve user',
@@ -165,7 +166,7 @@ class AuthEndpoint extends Endpoint {
         },
       ];
     } catch (e) {
-      session.log('Get all users error: $e');
+      await ErrorLogger.logError(session, e, context: 'AuthEndpoint.getAllUsers');
       throw Exception('Failed to retrieve users');
     }
   }

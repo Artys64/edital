@@ -66,6 +66,10 @@ app.*.map.json
 logs/
 *.log
 
+# Serverpod error logs
+serverpod_errors.log
+serverpod_errors_test.log
+
 # Docker
 Dockerfile.dev
 docker-compose.override.yml
